@@ -21,4 +21,16 @@ This is readme file for react.
 - Different build and production build
 
 
+# Babel
+
+- it is transpiler of jsx into vanilla javascript
+-parcel is the manager of the code package.
+-It converts all higher version of javascript to the plain so that browser can understand this code.
+
+
+# React element and react components 
+it is an js object.
+It is a js function which is simply return the jsx.
+
+
 
