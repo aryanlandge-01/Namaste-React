@@ -32,5 +32,27 @@ This is readme file for react.
 it is an js object.
 It is a js function which is simply return the jsx.
 
+# food ordering app 
+- header
+- body 
+- footer
+
+
+# export components in react 
+
+- named or default
+- export default <name of variable> 
+- export const <variable>
+
+
+# react hooks 
+
+- normal Js utility function
+useState() - Superpowerful State React variable
+useEffect()
+
+# state variable 
+
+whenever there is change in state variable react triggers it reconcilation cycle and renders the whole components.
 
 
