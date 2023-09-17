@@ -1,19 +1,24 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
-import Contact from "./components/contact";
+// import Contact from "./components/contact";
 import Error from "./components/Error";
 import Cart from "./components/Cart";
 import RestaruantsMenu from "./components/RestaruantsMenu";
+// import Grocery from "./components/Grocery";
 
 
 // Header footer body search restaurantcontainer
 
 
 //React Element
+
+const Grocery = lazy(() => import("./components/Grocery"));
+
+const Contact = lazy(() => import("./components/contact"));
 
 
 const Footer = () => {
@@ -49,8 +54,11 @@ const appRouter = createBrowserRouter([
             },
             {
                 path: "/contact",
-                element: <Contact />,
-
+                element: <Suspense fallback={(<h1>Loading.....</h1>)}><Contact /></Suspense>,
+            },
+            {
+                path: "/grocery",
+                element: <Suspense fallback={(<h1>hello</h1>)}><Grocery /></Suspense>,
             },
             {
                 path: "/cart",

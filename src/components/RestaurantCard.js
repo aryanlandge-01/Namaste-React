@@ -16,10 +16,10 @@ const RestaurantCard = (props) => {
 
 
     return (
-        <div className="res-card">
-            <img alt="res-img"
+        <div className="m-4 p-4 w-44 bg-gray-200 rounded-lg h-54 hover:bg-gray-300" >
+            <img className="rounded-lg" alt="res-img"
                 src={CDN_URL + cloudinaryImageId} />
-            <h3>{name}</h3>
+            <h3 className="font-bold py-2 text-lg">{name}</h3>
             <h4>{cuisines.join(" ,")}</h4>
             <h4>{avgRating} stars</h4>
             <h4>{costForTwo} FOR TWO</h4>
@@ -27,6 +27,21 @@ const RestaurantCard = (props) => {
         </div>
     )
 };
+
+//Higher order component 
+
+//input is the restaturnt card ==> restaruntcardpromoted 
+
+export const withPromotedLabel = (RestaurantCard) => {
+    return (props) => {
+        return (
+            <div className="text-right font-bold bg-pink-800">
+                <label>Promoted</label>
+                <RestaurantCard {...props} />
+            </div>
+        )
+    }
+}
 
 
 export default RestaurantCard;
