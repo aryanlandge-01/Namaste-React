@@ -23,9 +23,8 @@ class About extends Component {
     render() {
         console.log("Render parent")
         return (
-            <div>
-                <h1>About</h1>
-                <h2>This is Namaste react webseries</h2>
+            <div className="flex">
+
                 <UserName name={"class Aryan"} location={"Mumbai class"} contact={"8928199213 (class)"} />
 
             </div>

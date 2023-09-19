@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "./UserContext";
 
 
 
@@ -60,18 +61,20 @@ export const Body = () => {
 
     // Rest of your component code for when online
 
+    const { setUsername, loggedInUser } = useContext(UserContext);
+
 
 
 
 
     return (filterRestarunt.length === 0) ? <Shimmer /> : (
         <div className="body">
-            <div className="filter flex">
+            <div className="filter flex  mx-16">
                 <div className="search m-3 p-4 ">
-                    <input type="text" className="border border-solid border-black" value={searchtext} placeholder="search" onChange={(e) => {
+                    <input type="text" className=" w-80 border border-solid border-black rounded-lg p-2" value={searchtext} placeholder="search" onChange={(e) => {
                         setsearchtext(e.target.value);
                     }} />
-                    <button className="px-4 py-1 bg-green-200 m-4 rounded-lg" onClick={() => {
+                    <button className="px-4 py-2 bg-green-200 m-4 rounded-lg" onClick={() => {
                         console.log(searchtext)
 
                         // const filterlistofres = filterRestarunt.filter((res) => res.info.name.include.toLowerCase() === searchtext.toLowerCase());
@@ -83,9 +86,9 @@ export const Body = () => {
                     }}
                     >Search</button>
                 </div>
-                <div className="m-4 p-3 flex items-center">
+                <div className="m-4 py-2 flex items-center">
                     <button
-                        className="px-4 py-1 bg-gray-200 rounded-lg"
+                        className="px-4 py-2 bg-gray-200 rounded-lg"
                         onClick={() => {
                             const filteredList = listofRestarunt.filter(
                                 (res) => res.info.avgRating > 4.3
@@ -95,9 +98,14 @@ export const Body = () => {
                         Top Rated Restaurants
                     </button>
                 </div>
-
+                <div className="flex m-4 px-2 rounded-lg items-center bg-gray-300">
+                    <label>UserName :  </label>
+                    <input className="border border-solid border-black rounded-lg p-2"
+                        value={loggedInUser}
+                        onChange={(e) => setUsername(e.target.value)} />
+                </div>
             </div>
-            <div className="res-container flex flex-wrap mx-16">
+            <div className="res-container flex flex-wrap mx-20">
                 {filterRestarunt.map((restaurant) => (
                     <Link className="link"
                         key={restaurant?.info.id}

@@ -55,4 +55,12 @@ useEffect()
 
 whenever there is change in state variable react triggers it reconcilation cycle and renders the whole components.
 
+# Redux Toolkit
+ - install @redux/toolkit and react-redux 
+ - Build our own store to our app 
+ - connect our store to our app 
+ - Slice (cartslice)
+ - dispatch the action 
+ - read data through the selector 
+
 

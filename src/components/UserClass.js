@@ -54,11 +54,19 @@ class UserName extends React.Component {
 
 
 
-        return <div className="user-card">
-            <img src={avatar_url} />
-            <h2>Name: {name}</h2>
-            <h2>Location: {location} </h2>
-            <h4>Bio: {bio} </h4>
+        return <div className="flex m-auto my-5 bg-green-300 rounded-lg">
+            <div className="w-8/12 p-4 m-auto">
+                <h2>Name: {name}</h2>
+                <br />
+                <h2>Location: {location} </h2>
+                <br />
+                <h4>Bio: {bio} </h4>
+            </div>
+            <div className="w-4/12 m-auto   rounded-xl">
+                <img className="border border-y-black rounded-lg" src={avatar_url} />
+            </div>
+
+
         </div>
     }
 
