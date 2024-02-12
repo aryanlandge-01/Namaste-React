@@ -20,7 +20,7 @@ export const Body = () => {
         fetchData();
     }, []);
 
-    console.log(listofRestarunt);
+    // console.log(listofRestarunt);
 
     const fetchData = async () => {
         const data = await fetch(
@@ -40,12 +40,8 @@ export const Body = () => {
 
     };
 
-    // conditional rendering 
-    // if (filterRestarunt.length === 0) {
-    //     return <Shimmer />
-    // }
 
-    console.log(listofRestarunt);
+    // console.log(listofRestarunt);
 
     const onlineStatus = useOnlineStatus();
 
@@ -63,11 +59,10 @@ export const Body = () => {
 
     const { setUsername, loggedInUser } = useContext(UserContext);
 
+    
+     
 
-
-
-
-    return (filterRestarunt.length === 0) ? <Shimmer /> : (
+    return (filterRestarunt.length === 0)? <Shimmer /> : (
         <div className="body">
             <div className="filter flex  mx-16">
                 <div className="search m-3 p-4 ">
@@ -125,6 +120,7 @@ export const Body = () => {
     )
 
 };
+
 
 
 export default Body;
