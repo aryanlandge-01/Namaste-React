@@ -4,13 +4,14 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "./UserContext";
+import axios from "axios";
 
 
 
 export const Body = () => {
 
-    const [listofRestarunt, setListOfRestraunt] = useState([]);
-    const [filterRestarunt, setFilteredRestaurant] = useState([]);
+    const [listOfRestaurant, setListOfRestaurant] = useState([]);
+    const [filterRestaurant, setFilteredRestaurant] = useState([]);
 
     const [searchtext, setsearchtext] = useState("");
 
@@ -22,24 +23,29 @@ export const Body = () => {
 
     // console.log(listofRestarunt);
 
+    // 
     const fetchData = async () => {
-        const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
-        );
-
-        const json = await data.json();
-
-        console.log(json);
-
-        setListOfRestraunt(
-            json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        );
-        setFilteredRestaurant(
-            json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        );
-
+        try {
+            const response = await axios.get(
+                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+            );
+    
+            const json = response.data;
+    
+            
+    
+            setListOfRestaurant(
+                json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+            );
+            setFilteredRestaurant(
+                json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+            );
+            
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     };
-
+    
 
     // console.log(listofRestarunt);
 
@@ -59,10 +65,12 @@ export const Body = () => {
 
     const { setUsername, loggedInUser } = useContext(UserContext);
 
+    // console.log(filterRestaurant);
     
-     
+    
+    
 
-    return (filterRestarunt.length === 0)? <Shimmer /> : (
+    return (filterRestaurant.length === 0)? <Shimmer /> : (
         <div className="body">
             <div className="filter flex  mx-16">
                 <div className="search m-3 p-4 ">
@@ -73,7 +81,7 @@ export const Body = () => {
                         console.log(searchtext)
 
                         // const filterlistofres = filterRestarunt.filter((res) => res.info.name.include.toLowerCase() === searchtext.toLowerCase());
-                        const filterlistofres = listofRestarunt.filter((res) =>
+                        const filterlistofres = listOfRestaurant.filter((res) =>
                             res.info.name.toLowerCase().includes(searchtext.toLowerCase())
                         );
 
@@ -85,7 +93,7 @@ export const Body = () => {
                     <button
                         className="px-4 py-2 bg-gray-200 rounded-lg"
                         onClick={() => {
-                            const filteredList = listofRestarunt.filter(
+                            const filteredList = listOfRestaurant.filter(
                                 (res) => res.info.avgRating > 4.3
                             );
                             setFilteredRestaurant(filteredList);
@@ -101,7 +109,7 @@ export const Body = () => {
                 </div>
             </div>
             <div className="res-container flex flex-wrap mx-20">
-                {filterRestarunt.map((restaurant) => (
+                {filterRestaurant.map((restaurant) => (
                     <Link className="link"
                         key={restaurant?.info.id}
                         to={"/restaurants/" + restaurant?.info.id}
